@@ -21,7 +21,7 @@ from classla.utils.resources import DEFAULT_MODEL_DIR, default_treebanks, mwt_la
 
 DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{NER},{POS},{LEMMA},{DEPPARSE}'
 
-SPECIAL_DEFAULT_PROCESSORS_LIST = {
+SPECIAL_DEFAULT_PROCESSORS = {
     'mk_1984': f'{TOKENIZE},{POS},{LEMMA}'
 }
 
@@ -107,7 +107,7 @@ class Pipeline:
             fallback_shorthand = default_treebanks[lang] if treebank is None else treebank
         # when default processors list is None set it up accordingly
         if processors is None:
-            processors = DEFAULT_PROCESSORS_LIST if shorthand not in SPECIAL_DEFAULT_PROCESSORS_LIST else SPECIAL_DEFAULT_PROCESSORS_LIST[shorthand]
+            processors = DEFAULT_PROCESSORS_LIST if shorthand not in SPECIAL_DEFAULT_PROCESSORS else SPECIAL_DEFAULT_PROCESSORS[shorthand]
 
         config = build_default_config(shorthand, models_dir, fallback_shorthand, DEFAULT_PROCESSORS_LIST)
         config.update(kwargs)
